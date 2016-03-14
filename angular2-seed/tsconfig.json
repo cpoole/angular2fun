@@ -1,0 +1,37 @@
+{
+  "compilerOptions": {
+    "outDir": "app",
+    "target": "es5",
+    "module": "system",
+    "moduleResolution": "node",
+    "sourceMap": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "removeComments": false,
+    "noImplicitAny": false
+  },
+  "filesGlob": [
+    "./src/**/*.ts",
+    "./src/**/*.tsx",
+    "typings/browser.d.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "typings/main",
+    "typings/main.d.ts"
+  ],
+  "files": [
+    "./src/components/app/app.component.ts",
+    "./src/components/dashboard/dashboard.component.ts",
+    "./src/components/hero-detail/hero-detail.component.ts",
+    "./src/components/heroes/heroes.component.ts",
+    "./src/interfaces/hero.ts",
+    "./src/main.ts",
+    "./src/services/hero/hero.service.ts",
+    "./src/services/hero/mock-heroes.ts",
+    "typings/browser.d.ts"
+  ],
+  "atom": {
+    "rewriteTsconfig": true
+  }
+}
