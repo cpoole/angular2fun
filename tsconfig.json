@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "outDir": "app",
+    "outDir": "dist/app",
     "target": "es5",
     "module": "system",
     "moduleResolution": "node",
@@ -8,11 +8,12 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "removeComments": false,
-    "noImplicitAny": false
+    "noImplicitAny": false,
+    "suppressImplicitAnyIndexErrors": true
   },
   "filesGlob": [
-    "./src/**/*.ts",
-    "./src/**/*.tsx",
+    "./app/**/*.ts",
+    "./app/**/*.tsx",
     "typings/browser.d.ts"
   ],
   "exclude": [
@@ -21,14 +22,14 @@
     "typings/main.d.ts"
   ],
   "files": [
-    "./src/components/app/app.component.ts",
-    "./src/components/dashboard/dashboard.component.ts",
-    "./src/components/hero-detail/hero-detail.component.ts",
-    "./src/components/heroes/heroes.component.ts",
-    "./src/interfaces/hero.ts",
-    "./src/main.ts",
-    "./src/services/hero/hero.service.ts",
-    "./src/services/hero/mock-heroes.ts",
+    "./app/components/app/app.component.ts",
+    "./app/components/dashboard/dashboard.component.ts",
+    "./app/components/hero-detail/hero-detail.component.ts",
+    "./app/components/heroes/heroes.component.ts",
+    "./app/interfaces/hero.ts",
+    "./app/main.ts",
+    "./app/services/hero/hero.service.ts",
+    "./app/services/hero/mock-heroes.ts",
     "typings/browser.d.ts"
   ],
   "atom": {
