@@ -1,2 +1,5 @@
-npm install
-npm start
+```
+npm i
+gulp build
+gulp serve
+```
