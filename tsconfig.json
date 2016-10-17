@@ -2,7 +2,7 @@
   "compilerOptions": {
     "outDir": "dist/app",
     "target": "es5",
-    "module": "system",
+    "module": "commonjs",
     "moduleResolution": "node",
     "sourceMap": true,
     "emitDecoratorMetadata": true,
@@ -19,17 +19,24 @@
   "exclude": [
     "node_modules",
     "typings/main",
-    "typings/main.d.ts"
+    "typings/main.d.ts",
+    "typings/index.d.ts"
   ],
   "files": [
+    "./app/app-routing.module.ts",
+    "./app/app.module.ts",
+    "./app/classes/hero.ts",
     "./app/components/app/app.component.ts",
     "./app/components/dashboard/dashboard.component.ts",
     "./app/components/hero-detail/hero-detail.component.ts",
+    "./app/components/hero-search/hero-search.component.ts",
     "./app/components/heroes/heroes.component.ts",
     "./app/interfaces/hero.ts",
     "./app/main.ts",
+    "./app/services/hero-search/hero-search.service.ts",
     "./app/services/hero/hero.service.ts",
     "./app/services/hero/mock-heroes.ts",
+    "./app/services/in-memory-data/in-memory-data.service.ts",
     "typings/browser.d.ts"
   ],
   "atom": {

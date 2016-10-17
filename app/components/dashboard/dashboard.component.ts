@@ -1,5 +1,6 @@
-import { Component, OnInit } from "angular2/core";
-import { Router } from "angular2/router";
+import { Component, OnInit } from "@angular/core";
+import { Router } from "@angular/router";
+import * as bcrypt from 'bcryptjs';
 
 import {Hero} from "../../interfaces/hero";
 import {HeroService} from "../../services/hero/hero.service";
@@ -14,6 +15,7 @@ export class DashboardComponent implements OnInit {
   constructor(
     private _heroService: HeroService,
     private _router: Router) {
+    console.log(bcryptjs.hashSync("nraboy", 8));
   }
 
   ngOnInit() {

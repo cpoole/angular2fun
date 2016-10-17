@@ -1,27 +1,39 @@
-import {Component, OnInit} from "angular2/core";
-import {RouteParams} from "angular2/router";
-import {HeroService} from "../../services/hero/hero.service";
-import {Hero} from "../../interfaces/hero";
+import { Component, OnInit }      from '@angular/core';
+import { ActivatedRoute, Params } from '@angular/router';
+import { Location }               from '@angular/common';
+
+import { Hero }        from '../../classes/hero';
+import { HeroService } from '../../services/hero/hero.service';
 
 @Component({
-    selector: "my-hero-detail",
-    templateUrl: "app/components/hero-detail/hero-detail.component.html",
-    styleUrls: ["app/components/hero-detail/hero-detail.component.css"]
+//  moduleId: module.id,
+  selector: 'my-hero-detail',
+  templateUrl: 'app/components/hero-detail/hero-detail.component.html',
+  styleUrls: [ 'app/components/hero-detail/hero-detail.component.css' ]
 })
-export class HeroDetailComponent {
-    hero: Hero;
+export class HeroDetailComponent implements OnInit {
+  hero: Hero;
 
-    constructor(private _heroService: HeroService, private _routeParams: RouteParams) {
+  constructor(
+    private heroService: HeroService,
+    private route: ActivatedRoute,
+    private location: Location
+  ) {}
 
-    };
+  ngOnInit(): void {
+    this.route.params.forEach((params: Params) => {
+      let id = +params['id'];
+      this.heroService.getHero(id)
+        .then(hero => this.hero = hero);
+    });
+  }
 
-    ngOnInit() {
-        let id = +this._routeParams.get("id");
-        this._heroService.getHero(id)
-          .then(hero => this.hero = hero);
-    }
+  save(): void {
+    this.heroService.update(this.hero)
+      .then(() => this.goBack());
+  }
 
-    goBack() {
-        window.history.back();
-    }
+  goBack(): void {
+    this.location.back();
+  }
 }

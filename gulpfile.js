@@ -22,29 +22,22 @@ gulp.task('copy:assets', ['clean'], function() {
 // copy dependencies
 gulp.task('copy:libs', ['clean'], function() {
   return gulp.src([
-      'node_modules/angular2/bundles/angular2-polyfills.js',
-      'node_modules/systemjs/dist/system.src.js',
-      'node_modules/systemjs/dist/system-polyfills.js',
-      'node_modules/rxjs/bundles/Rx.js',
-      'node_modules/angular2/bundles/angular2.dev.js',
-      'node_modules/angular2/bundles/router.dev.js',
-      'node_modules/node-uuid/uuid.js',
-      'node_modules/immutable/dist/immutable.js',
-      'node_modules/angular2/es6/dev/src/testing/shims',
-      'node_modules/es6-shim/es6-shim.min.js',
-      'node_modules/angular2/es6/dev/src/testing/shims_for_IE.js'
+      'node_modules/core-js/client/shim.min.js',
+      'node_modules/zone.js/dist/zone.js',
+      'node_modules/reflect-metadata/Reflect.js',
+      'node_modules/systemjs/dist/system.src.js'
     ])
     .pipe(gulp.dest('dist/libs'))
 });
 
 // linting
-gulp.task('tslint', function() {
-  return gulp.src('app/**/*.ts')
-  .pipe(tslint({
-      formatter: "verbose"
-  }))
-  .pipe(tslint.report())
-});
+// gulp.task('tslint', function() {
+//   return gulp.src('app/**/*.ts')
+//   .pipe(tslint({
+//       formatter: "verbose"
+//   }))
+//   .pipe(tslint.report())
+// });
 
 
 // TypeScript compile
@@ -76,6 +69,6 @@ gulp.task('serve', ['build'], function() {
   gulp.watch(['app/**/*', 'index.html', 'styles.css'], ['buildAndReload']);
 });
 
-gulp.task('build', ['tslint', 'compile', 'copy:libs', 'copy:assets']);
+gulp.task('build', ['compile', 'copy:libs', 'copy:assets']);
 gulp.task('buildAndReload', ['build'], reload);
 gulp.task('default', ['build']);
