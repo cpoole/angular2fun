@@ -1,12 +1,14 @@
 const gulp = require('gulp');
 const del = require('del');
-const typescript = require('gulp-typescript');
+const ts = require('gulp-typescript');
 const tscConfig = require('./tsconfig.json');
 const sourcemaps = require('gulp-sourcemaps');
 const tslint = require('gulp-tslint');
 const browserSync = require('browser-sync');
 const reload = browserSync.reload;
 const tsconfig = require('tsconfig-glob');
+var tsProject = ts.createProject('tsconfig.json');
+
 
 // clean the contents of the distribution directory
 gulp.task('clean', function () {
@@ -15,39 +17,32 @@ gulp.task('clean', function () {
 
 // copy static assets - i.e. non TypeScript compiled source
 gulp.task('copy:assets', ['clean'], function() {
-  return gulp.src(['app/**/*', 'index.html', 'styles.css', '!app/**/*.ts'], { base : './' })
+  return gulp.src(['app/**/*', 'index.html', 'styles.css', 'systemjs.config.js', '!app/**/*.ts'], { base : './' })
     .pipe(gulp.dest('dist'))
 });
 
 // copy dependencies
 gulp.task('copy:libs', ['clean'], function() {
   return gulp.src([
-      'node_modules/core-js/client/shim.min.js',
-      'node_modules/zone.js/dist/zone.js',
-      'node_modules/reflect-metadata/Reflect.js',
-      'node_modules/systemjs/dist/system.src.js'
+      'node_modules/**/*'
     ])
     .pipe(gulp.dest('dist/libs'))
 });
 
 // linting
-// gulp.task('tslint', function() {
-//   return gulp.src('app/**/*.ts')
-//   .pipe(tslint({
-//       formatter: "verbose"
-//   }))
-//   .pipe(tslint.report())
-// });
+gulp.task('tslint', function() {
+  return gulp.src('app/**/*.ts')
+  .pipe(tslint({
+      formatter: "verbose"
+  }))
+  .pipe(tslint.report())
+});
 
+gulp.task('compile', ['clean'], function() {
+    var tsResult = tsProject.src() // instead of gulp.src(...)
+        .pipe(tsProject());
 
-// TypeScript compile
-gulp.task('compile', ['clean'], function () {
-  return gulp
-    .src(tscConfig.files)
-    .pipe(sourcemaps.init())
-    .pipe(typescript(tscConfig.compilerOptions))
-    .pipe(sourcemaps.write('.'))
-    .pipe(gulp.dest('dist/app'));
+    return tsResult.js.pipe(sourcemaps.init()).pipe(sourcemaps.write('.')).pipe(gulp.dest('dist/app'));
 });
 
 // update the tsconfig files based on the glob pattern
@@ -69,6 +64,6 @@ gulp.task('serve', ['build'], function() {
   gulp.watch(['app/**/*', 'index.html', 'styles.css'], ['buildAndReload']);
 });
 
-gulp.task('build', ['compile', 'copy:libs', 'copy:assets']);
+gulp.task('build', ['tslint', 'compile', 'copy:libs', 'copy:assets']);
 gulp.task('buildAndReload', ['build'], reload);
 gulp.task('default', ['build']);

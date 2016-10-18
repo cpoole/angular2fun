@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
-    "outDir": "dist/app",
+    "outDir": "dist/app/",
+    "rootDir": "app",
     "target": "es5",
     "module": "commonjs",
     "moduleResolution": "node",
@@ -14,13 +15,10 @@
   "filesGlob": [
     "./app/**/*.ts",
     "./app/**/*.tsx",
-    "typings/browser.d.ts"
+    "typings/index.d.ts"
   ],
   "exclude": [
-    "node_modules",
-    "typings/main",
-    "typings/main.d.ts",
-    "typings/index.d.ts"
+    "node_modules"
   ],
   "files": [
     "./app/app-routing.module.ts",
@@ -33,11 +31,11 @@
     "./app/components/heroes/heroes.component.ts",
     "./app/interfaces/hero.ts",
     "./app/main.ts",
+    "./app/rxjs-extensions.ts",
     "./app/services/hero-search/hero-search.service.ts",
     "./app/services/hero/hero.service.ts",
-    "./app/services/hero/mock-heroes.ts",
     "./app/services/in-memory-data/in-memory-data.service.ts",
-    "typings/browser.d.ts"
+    "typings/index.d.ts"
   ],
   "atom": {
     "rewriteTsconfig": true

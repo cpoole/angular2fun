@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { Router }            from '@angular/router';
 
 import { Hero }                from '../../classes/hero';
-import { HeroService }         from '../../services//hero/hero.service';
+import { HeroService }         from '../../services/hero/hero.service';
 
 @Component({
-  //moduleId: module.id,
+  // moduleId: module.id,
   selector: 'my-heroes',
   templateUrl: 'app/components/heroes/heroes.component.html',
   styleUrls: [ 'app/components/heroes/heroes.component.css' ]
